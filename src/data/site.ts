@@ -33,9 +33,9 @@ export const site = {
   url: "https://khanography.com",
   email: "hello@khanography.com",
   phone: "+92 300 0000000",
-  yearsExperience: 8,
+  yearsExperience: 4,
   socials: [
-    { label: "Instagram", href: "https://instagram.com", handle: "@khanography" },
+    { label: "Instagram", href: "https://www.instagram.com/khanography__?igsh=ejdzbHZoMWQ4dWpw", handle: "@khanography" },
     { label: "YouTube", href: "https://youtube.com", handle: "/khanography" },
     { label: "Vimeo", href: "https://vimeo.com", handle: "/khanography" },
     { label: "Behance", href: "https://behance.net", handle: "/khanography" },
@@ -103,7 +103,7 @@ export const hero = {
 export const intro = {
   eyebrow: "The Professional",
   title: "A visual storyteller behind the lens.",
-  bio: "I'm Talha Khan — a filmmaker, photographer and licensed drone operator based in Islamabad, working with brands, agencies and couples across Pakistan and beyond. For the last eight years I've been trusted to turn real moments into cinematic stories: from intimate wedding films to commercial campaigns shot from the air.",
+  bio: "Hello! My name is Talha Khan, and I am a passionate Videographer, Video Editor, Photographer, and Drone Operator. I am from Koherai, Malakand (Lower Dir), Pakistan. With a strong creative vision and technical skills, I specialize in capturing and transforming moments into powerful visual stories.I currently work with IT Lewal Technologies, where I contribute to professional video production, photography, and drone projects. I have over 3 years of hands-on experience in the media and creative industry.",
   bioSecondary:
     "I handle the full pipeline — concept, cinematography, aerial coverage, colour grading and sound — so the final film feels like one continuous thought rather than a collection of clips.",
   portrait: photo("asim-khan-portrait", 900, 1200),
