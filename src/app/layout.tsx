@@ -1,0 +1,227 @@
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif, Sora } from "next/font/google";
+import Script from "next/script";
+import { site, seo } from "@/data/site";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/site/navbar";
+import { Footer } from "@/components/site/footer";
+import { CustomCursor } from "@/components/site/custom-cursor";
+import { ScrollProgress } from "@/components/site/scroll-progress";
+import "./globals.css";
+
+/* -------------------------------------------------------------------------- */
+/*  Fonts — self-hosted by next/font, preloaded, no layout shift              */
+/* -------------------------------------------------------------------------- */
+
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sora",
+  weight: ["400", "500", "600"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument",
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
+/* -------------------------------------------------------------------------- */
+/*  SEO                                                                      */
+/* -------------------------------------------------------------------------- */
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: seo.title,
+    template: `%s — ${site.brand}`,
+  },
+  description: seo.description,
+  keywords: [...seo.keywords],
+  applicationName: site.brand,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.brand,
+  alternates: { canonical: "/" },
+  category: "Photography & Videography",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: site.url,
+    siteName: site.brand,
+    title: seo.title,
+    description: seo.description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `${site.brand} — cinematic film, photography and aerial work by ${site.name}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.title,
+    description: seo.description,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#05070b" },
+  ],
+};
+
+/* -------------------------------------------------------------------------- */
+/*  Structured data                                                           */
+/* -------------------------------------------------------------------------- */
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      alternateName: site.brand,
+      jobTitle: site.roles.join(", "),
+      description: seo.description,
+      image: `${site.url}/opengraph-image`,
+      email: `mailto:${site.email}`,
+      telephone: site.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.locationShort,
+        addressCountry: "PK",
+      },
+      knowsAbout: [
+        "Videography",
+        "Video Editing",
+        "Colour Grading",
+        "Photography",
+        "Drone Operation",
+        "Aerial Cinematography",
+        "Sound Design",
+      ],
+      worksFor: { "@id": `${site.url}/#organization` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.brand,
+      url: site.url,
+      logo: `${site.url}/icon.svg`,
+      founder: { "@id": `${site.url}/#person` },
+      sameAs: site.socials.map((social) => social.href),
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site.url}/#service`,
+      name: site.brand,
+      description: seo.description,
+      url: site.url,
+      image: `${site.url}/opengraph-image`,
+      telephone: site.phone,
+      email: site.email,
+      priceRange: "$$",
+      areaServed: "Worldwide",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.locationShort,
+        addressCountry: "PK",
+      },
+      founder: { "@id": `${site.url}/#person` },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Services",
+        itemListElement: [
+          "Videography",
+          "Photography",
+          "Video Editing",
+          "Drone Operation",
+          "Creative Editing",
+        ].map((name) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.brand,
+      description: seo.description,
+      inLanguage: "en",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+  ],
+};
+
+/* -------------------------------------------------------------------------- */
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${sora.variable} ${inter.variable} ${instrument.variable}`}
+    >
+      <body className="flex min-h-dvh flex-col antialiased">
+        <ThemeProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-9999 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:text-bg"
+          >
+            Skip to content
+          </a>
+
+          <ScrollProgress />
+          <CustomCursor />
+          <Navbar />
+
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+
+          <Footer />
+        </ThemeProvider>
+
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      </body>
+    </html>
+  );
+}

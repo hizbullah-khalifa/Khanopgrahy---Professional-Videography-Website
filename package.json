@@ -1,0 +1,36 @@
+{
+  "name": "asim-khan-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "shoot": "node tools/shoot.mjs",
+    "shoot:light": "node tools/shoot.mjs --theme=light --out=screenshots-light",
+    "shoot:mobile": "node tools/shoot.mjs --width=390 --height=844 --out=screenshots-mobile",
+    "smoke": "node tools/smoke.mjs",
+    "weight": "node tools/weight.mjs",
+    "check": "npm run lint && npm run typecheck && npm run build && npm run smoke"
+  },
+  "dependencies": {
+    "lucide-react": "^1.48.0",
+    "motion": "^13.4.4",
+    "next": "16.3.6",
+    "next-themes": "^0.4.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
