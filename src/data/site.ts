@@ -29,8 +29,8 @@ export const site = {
   availability: "Available for projects worldwide",
   url: "https://khanography.vercel.app",
   email: "khanography1@gmail.com",
-  phone: "+92 48 0603071",
-  yearsExperience: 3,
+  phone: "+92 348 0603071",
+  yearsExperience: 4,
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/khanography__/?hl=en", handle: "@khanography__" },
     { label: "YouTube", href: "https://www.youtube.com/@khanography1", handle: "@khanography1" },
@@ -58,9 +58,20 @@ export const navLinks = [
 const photo = (seed: string, w: number, h: number, grayscale = false) =>
   `https://picsum.photos/seed/${seed}/${w}/${h}${grayscale ? "?grayscale" : ""}`;
 
+/** Files that are PNG instead of JPG (logos). Remove a name if it's really a .jpg */
+const pngFiles = new Set(["dc1", "dyo1", "lewal1"]);
+
 /** Your own photo from /public/images, by file name without extension.
  *  Example: img("lifestyle1") -> /images/lifestyle1.jpg */
-const img = (name: string) => `/images/${name}.jpg`;
+const img = (name: string) =>
+  `/images/${name}.${pngFiles.has(name) ? "png" : "jpg"}`;
+
+/** Gallery from numbered files, e.g. gallerySet("dc", 1, "DC event") -> dc1 */
+const gallerySet = (prefix: string, count: number, label: string) =>
+  Array.from({ length: count }, (_, i) => ({
+    src: img(`${prefix}${i + 1}`),
+    alt: `${label} ${i + 1}`,
+  }));
 
 /** YouTube thumbnail for a video id. */
 const yt = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
@@ -130,16 +141,16 @@ export const about = {
   paragraphs: [
     "Hello! My name is Talha Khan, and I am a passionate Videographer, Video Editor, Photographer, and Drone Operator from Koherai, Malakand (Lower Dir), Pakistan.",
     "With a strong creative vision and technical skills, I specialize in capturing and transforming moments into powerful visual stories. I currently work with Lewal Technologies, where I contribute to professional video production, photography, and drone projects.",
-    "I have over 3 years of hands-on experience in the media and creative industry, creating content for brands, businesses and social media platforms.",
+    "I have over 4 years of hands-on experience in the media and creative industry, creating content for brands, businesses and social media platforms.",
   ],
   philosophy:
     "Every project starts with a feeling. The camera, the edit, the drone — they're all in service of it.",
   experience: [
     {
-      period: "Present",
+      period: "Present · 4 years",
       role: "Production Manager & Professional Videographer",
       place: "Lewal Technologies",
-      note: "Leading professional video production, photography and drone projects.",
+      note: "Leading professional video production, photography, drone projects and social media management.",
     },
     {
       period: "Freelance",
@@ -260,6 +271,9 @@ export const photoCategories = [
   "Portraits",
   "Weddings",
   "Events",
+  "Government",
+  "Corporate",
+  "Real Estate",
   "Nature",
   "Travel",
   "Products",
@@ -271,7 +285,7 @@ export type PhotoCategory = Exclude<(typeof photoCategories)[number], "All">;
 const P = { width: 800, height: 1200 }; // portrait
 const L = { width: 1200, height: 800 }; // landscape
 
-export const photos: PhotoItem[] = [
+const basePhotos: PhotoItem[] = [
   // Portraits
   { id: "p01", title: "Studio Portrait", category: "Portraits", src: img("img-2"), alt: "Portrait of a bearded man in soft light", ...P },
   { id: "p02", title: "Behind the Lens", category: "Portraits", src: img("portrait3"), alt: "Photographer holding a camera", ...P },
@@ -342,6 +356,38 @@ export const photos: PhotoItem[] = [
   { id: "p55", title: "Friends in Green", category: "Lifestyle", src: img("lifestyle6"), alt: "Two young men standing among green trees", ...P },
   { id: "p56", title: "Generations", category: "Lifestyle", src: img("lifestyle7"), alt: "Elderly man with a boy", ...P },
   { id: "p57", title: "Into the Green", category: "Lifestyle", src: img("lifestyle8"), alt: "Man walking through green hills", ...P },
+];
+
+/** Builds many photos from numbered files, e.g. dc1 … dc10 */
+const series = (
+  prefix: string,
+  count: number,
+  category: PhotoCategory,
+  title: string,
+  alt: string,
+  size: { width: number; height: number },
+  startId: number,
+): PhotoItem[] =>
+  Array.from({ length: count }, (_, i) => ({
+    id: `p${startId + i}`,
+    title: `${title} ${i + 1}`,
+    category,
+    src: img(`${prefix}${i + 1}`),
+    alt: `${alt} ${i + 1}`,
+    ...size,
+  }));
+
+/**
+ * Only list as many files as you actually have.
+ * When you add dc2.jpg, dc3.jpg … raise the number (1 -> 3, etc.).
+ */
+export const photos: PhotoItem[] = [
+  ...basePhotos,
+  ...series("dc", 1, "Government", "DC Office Event", "Event covered for the Deputy Commissioner Office, Lower Dir", L, 100),
+  ...series("dyo", 1, "Government", "Youth Programme", "Youth programme for the District Youth Officer, Lower Dir", L, 200),
+  ...series("lewal", 1, "Corporate", "Lewal Technologies", "Production work for Lewal Technologies", L, 300),
+  // Add this back when paradise1.jpg exists:
+  // ...series("paradise", 10, "Real Estate", "Paradise City Nowshera", "Paradise City Nowshera visual media", L, 400),
 ];
 
 export const photography = {
@@ -708,6 +754,123 @@ export const projects: Project[] = [
     ],
     featured: true,
   },
+  {
+    slug: "deputy-commissioner-lower-dir",
+    title: "Deputy Commissioner Lower Dir",
+    client: "Office of the Deputy Commissioner, Lower Dir",
+    type: "Government Media",
+    location: "Lower Dir, Khyber Pakhtunkhwa",
+    date: "Ongoing",
+    services: ["Photography", "Videography", "Drone", "Video Editing", "Event Coverage", "Social Media"],
+    summary:
+      "Professional photography, video, drone and editing for official events, public activities, development initiatives and community programs of the DC Office, Lower Dir.",
+    challenge:
+      "Government events need visual content that is both professional and informative. The goal was to capture important moments, people, places and activities to an official standard, ready for documentation and digital platforms.",
+    approach:
+      "Each assignment was planned around the event. Photography covered visits, meetings, ceremonies and public events. Videography gave a cinematic, documentary style. Drone shots showed locations, gatherings and landscapes from above. Editing added sequencing, transitions, music, colour and sound. Process: Planning, Shoot, Drone Coverage, Editing, Color & Sound, Final Delivery.",
+    outcome:
+      "A collection of professional photographs and videos for the DC Office, plus social-media-ready content. The work built strong experience in official event coverage, aerial cinematography and fast-paced production.",
+    cover: img("dc1"),
+    coverAlt: "Event covered for the Deputy Commissioner Office, Lower Dir",
+    gallery: gallerySet("dc", 1, "Deputy Commissioner Office coverage"),
+    metrics: [
+      { label: "My Role", value: "Photo · Video · Drone" },
+      { label: "Tools", value: "Premiere Pro · CapCut · Canva" },
+      { label: "Type", value: "Official Events" },
+    ],
+    featured: true,
+  },
+  {
+    slug: "district-youth-officer",
+    title: "District Youth Officer",
+    client: "District Youth Officer, Lower Dir",
+    type: "Youth Programs",
+    location: "Lower Dir, Khyber Pakhtunkhwa",
+    date: "Ongoing",
+    services: ["Photography", "Videography", "Video Editing", "Social Media"],
+    summary:
+      "Photo and video coverage of youth programs, events and activities for the District Youth Officer, Lower Dir.",
+    challenge:
+      "Youth events are busy and full of energy. The goal was to show the people and the spirit of each program clearly.",
+    approach:
+      "Planned coverage for each event, shot photos and video on the day, then edited clean videos and photo sets for social media and records.",
+    outcome:
+      "A set of event photographs and videos used to share youth programs with the public.",
+    cover: img("dyo1"),
+    coverAlt: "Youth program covered for the District Youth Officer, Lower Dir",
+    gallery: gallerySet("dyo", 1, "Youth program coverage"),
+    metrics: [
+      { label: "My Role", value: "Photo · Video" },
+      { label: "Deliverables", value: "Photos + Videos" },
+      { label: "Type", value: "Youth Events" },
+    ],
+    featured: true,
+  },
+  {
+    slug: "lewal-technologies",
+    title: "Lewal Technologies",
+    client: "Lewal Technologies",
+    type: "Production & Digital Media",
+    location: "Pakistan",
+    date: "4 Years",
+    services: [
+      "Photography",
+      "Videography",
+      "Drone",
+      "Video Editing",
+      "Social Media Management",
+      "Digital Branding",
+    ],
+    summary:
+      "Four years as Production Manager & Professional Videographer, managing visual content production and digital media for Lewal Technologies.",
+    challenge:
+      "Keeping a steady flow of professional content across photography, video, drone and social media, all with a consistent look and brand.",
+    approach:
+      "I manage the complete content process: planning, production, photography and videography, drone coverage, editing, social media management and publishing.",
+    outcome:
+      "Four years of hands-on experience in production management, cinematic videography, drone operations, post-production, digital branding and visual storytelling.",
+    cover: img("lewal1"),
+    coverAlt: "Production work for Lewal Technologies",
+    gallery: gallerySet("lewal", 1, "Lewal Technologies production"),
+    metrics: [
+      { label: "Position", value: "Production Manager" },
+      { label: "Experience", value: "4 Years" },
+      { label: "Scope", value: "Photo · Video · Drone · Social" },
+    ],
+    featured: true,
+  },
+  {
+    slug: "paradise-city-nowshera",
+    title: "Paradise City Nowshera",
+    client: "Paradise City, Nowshera",
+    type: "Visual Media",
+    location: "Nowshera, Khyber Pakhtunkhwa",
+    date: "2025",
+    services: ["Photography", "Videography", "Drone", "Video Editing", "Social Media"],
+    summary:
+      "Professional photography, cinematic video and aerial drone footage showcasing the location, development, surroundings and environment of Paradise City Nowshera.",
+    challenge:
+      "Showing the scale, setting and surroundings of a housing development clearly and attractively.",
+    approach:
+      "Planning, shooting on the ground, drone coverage from above, then editing and final delivery.",
+    outcome:
+      "Photos, cinematic video and aerial footage ready for digital platforms.",
+    // Temporary images from your folder. When paradise1.jpg … paradise10.jpg exist, use:
+    // cover: img("paradise1"), gallery: gallerySet("paradise", 10, "Paradise City Nowshera"),
+    cover: img("nature9"),
+    coverAlt: "Paradise City Nowshera visual media",
+    gallery: [
+      { src: img("nature9"), alt: "Town spread across a hillside" },
+      { src: img("nature10"), alt: "Green mountain valley with scattered houses" },
+      { src: img("nature2"), alt: "Aerial view of a town in a green valley" },
+    ],
+    metrics: [
+      { label: "My Role", value: "Photo · Video · Drone · Edit" },
+      { label: "Format", value: "Photos + Film + Aerial" },
+      { label: "Type", value: "Real Estate" },
+    ],
+    featured: true,
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -786,7 +949,7 @@ export const equipment = {
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/*  Testimonials — placeholders, replace with real client words               */
+/*  Testimonials — drafts: get each person's approval before publishing       */
 /* -------------------------------------------------------------------------- */
 
 export const testimonials = {
