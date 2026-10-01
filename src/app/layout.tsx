@@ -7,6 +7,7 @@ import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { CustomCursor } from "@/components/site/custom-cursor";
 import { ScrollProgress } from "@/components/site/scroll-progress";
+import { WhatsAppButton } from "@/components/site/whatsapp-button";
 import "./globals.css";
 
 /* -------------------------------------------------------------------------- */
@@ -217,6 +218,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         <Footer />
+        <WhatsAppButton />
 
         <Script
           id="json-ld"

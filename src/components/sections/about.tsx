@@ -18,7 +18,7 @@ export function About() {
           <div className="relative">
             <SmartImage
               src={about.portrait}
-              alt="Portrait of Asim Khan, videographer and photographer"
+              alt="Portrait of Talha Khan, videographer and photographer"
               ratio="4/5"
               sizes="(max-width: 1024px) 100vw, 38vw"
               quality={90}
@@ -31,7 +31,7 @@ export function About() {
             >
               <SmartImage
                 src={about.portraitSecondary}
-                alt="Asim Khan operating a cinema camera on location"
+                alt="Talha Khan operating a cinema camera on location"
                 ratio="4/5"
                 sizes="(max-width: 1024px) 45vw, 20vw"
                 className="rounded-2xl border-4 border-bg shadow-2xl"
