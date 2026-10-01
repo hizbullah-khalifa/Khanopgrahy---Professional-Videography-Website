@@ -20,14 +20,14 @@ export function Intro() {
             <div className="absolute -top-4 -left-4 hidden h-28 w-28 rounded-tl-2xl border-l border-t border-accent/40 sm:block" />
             <SmartImage
               src={intro.portrait}
-              alt="Professional profile photograph of Asim Khan, videographer and drone operator"
+              alt="Professional profile photograph of Talha Khan, videographer and drone operator"
               ratio="3/4"
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="rounded-2xl"
               quality={90}
             />
             <div className="absolute -right-3 -bottom-3 rounded-2xl border border-line glass px-4 py-3 sm:-right-6 sm:bottom-8">
-              <p className="font-display text-sm font-medium">Asim Khan</p>
+              <p className="font-display text-sm font-medium">Talha Khan</p>
               <p className="mt-0.5 flex items-center gap-1.5 text-[0.68rem] tracking-[0.12em] text-muted uppercase">
                 <MapPin className="size-3" strokeWidth={1.6} />
                 {intro.details[0].value}

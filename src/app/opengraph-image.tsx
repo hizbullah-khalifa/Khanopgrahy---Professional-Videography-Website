@@ -73,8 +73,8 @@ export default function OpengraphImage() {
             color: "#7f8a9d",
           }}
         >
-          <span>Asim Khan — Islamabad, Pakistan</span>
-          <span style={{ color: "#e9a23b" }}>khanography.com</span>
+          <span>Talha Khan — Islamabad, Pakistan</span>
+          <span style={{ color: "#e9a23b" }}>khanography.vercel.app</span>
         </div>
       </div>
     ),
