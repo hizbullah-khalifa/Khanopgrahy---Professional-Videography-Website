@@ -1,15 +1,14 @@
 import type { NextConfig } from "next";
 
 /**
- * Remote media hosts used by the placeholder media in `src/data/site.ts`.
- * When you replace the placeholders with your own assets (local files in
- * `/public` or your own CDN), update or delete these patterns.
+ * Remote media hosts. Your own photos live in /public/images and need no entry.
+ * i.ytimg.com serves the YouTube thumbnails.
  */
 const nextConfig: NextConfig = {
   reactCompiler: false,
   images: {
-    // Allow the placeholder hosts.
     remotePatterns: [
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/**" },
       { protocol: "https", hostname: "picsum.photos", pathname: "/**" },
       { protocol: "https", hostname: "fastly.picsum.photos", pathname: "/**" },
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },

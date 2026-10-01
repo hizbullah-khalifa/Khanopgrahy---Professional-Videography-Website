@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif, Sora } from "next/font/google";
 import Script from "next/script";
 import { site, seo } from "@/data/site";
-import { ThemeProvider } from "@/components/theme-provider";
+import { themeInitScript } from "@/lib/theme";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { CustomCursor } from "@/components/site/custom-cursor";
@@ -193,25 +193,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${sora.variable} ${inter.variable} ${instrument.variable}`}
     >
+      <head>
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col antialiased">
-        <ThemeProvider>
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-9999 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:text-bg"
-          >
-            Skip to content
-          </a>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-9999 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:text-bg"
+        >
+          Skip to content
+        </a>
 
-          <ScrollProgress />
-          <CustomCursor />
-          <Navbar />
+        <ScrollProgress />
+        <CustomCursor />
+        <Navbar />
 
-          <main id="main" className="flex-1">
-            {children}
-          </main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
 
-          <Footer />
-        </ThemeProvider>
+        <Footer />
 
         <Script
           id="json-ld"

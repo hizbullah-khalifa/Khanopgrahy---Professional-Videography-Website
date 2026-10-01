@@ -2,14 +2,11 @@
  * ---------------------------------------------------------------------------
  * SINGLE SOURCE OF TRUTH
  * ---------------------------------------------------------------------------
- * Every headline, image, video, project, testimonial and form option lives in
- * this file. Replace the placeholder media with real work and the whole site
- * updates — no component edits required.
+ * Every headline, image, video, project and form option lives in this file.
  *
- * PLACEHOLDER MEDIA
- *  - Photos  : picsum.photos (deterministic via `seed`) — swap for your own
- *              files in `/public` or your CDN and update `next.config.ts`.
- *  - Videos  : public sample clips, streamed only after a user interaction.
+ * IMAGES : your own photos live in /public/images (nature1.jpg, travel1.jpg,
+ *          lifestyle1.jpg, img-2.jpg, hero.jpg …). Use `img("name")` below.
+ * VIDEOS : YouTube IDs are listed in `longIds` and `shortIds`.
  * ---------------------------------------------------------------------------
  */
 
@@ -27,18 +24,20 @@ export const site = {
   roleLine:
     "Videographer • Video Editor • Photographer • Drone Operator • Creative Editor",
   tagline: "I Capture Stories From Every Perspective.",
-  location: "Timergara Dir Lower, Pakistan",
-  locationShort: "Islamabad",
+  location: "Timergara, Dir Lower, Pakistan",
+  locationShort: "Timergara",
   availability: "Available for projects worldwide",
-  url: "https://khanography.com",
-  email: "hello@khanography.com",
-  phone: "+92 300 0000000",
-  yearsExperience: 4,
+  url: "https://khanography.vercel.app",
+  email: "khanography1@gmail.com",
+  phone: "+92 48 0603071",
+  yearsExperience: 3,
   socials: [
-    { label: "Instagram", href: "https://www.instagram.com/khanography__?igsh=ejdzbHZoMWQ4dWpw", handle: "@khanography" },
-    { label: "YouTube", href: "https://youtube.com", handle: "/khanography" },
-    { label: "Vimeo", href: "https://vimeo.com", handle: "/khanography" },
-    { label: "Behance", href: "https://behance.net", handle: "/khanography" },
+    { label: "Instagram", href: "https://www.instagram.com/khanography__/?hl=en", handle: "@khanography__" },
+    { label: "YouTube", href: "https://www.youtube.com/@khanography1", handle: "@khanography1" },
+    { label: "Facebook", href: "https://www.facebook.com/khanography", handle: "/khanography" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/khanography-b1959734a/", handle: "/khanography" },
+    { label: "Tiktok", href: "https://www.tiktok.com/@khanography_?lang=en", handle: "@khanography_" },
+    { label: "Pinterest", href: "https://www.pinterest.com/khanography/", handle: "/khanography" },
   ],
 } as const;
 
@@ -55,22 +54,16 @@ export const navLinks = [
 /*  Media helpers                                                             */
 /* -------------------------------------------------------------------------- */
 
-/** Deterministic placeholder photo. Swap for a real URL / `/public` path. */
+/** Placeholder photo (only used for testimonial avatars). */
 const photo = (seed: string, w: number, h: number, grayscale = false) =>
   `https://picsum.photos/seed/${seed}/${w}/${h}${grayscale ? "?grayscale" : ""}`;
 
-/** Public sample clips — replace with your own MP4s or HLS streams. */
-const clips = {
-  alpine: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-  city: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-  motion: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-  studio: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-  lifestyle: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-  aerial: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
-  cinematic: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-  short: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
-  travel: "https://media.w3.org/2010/05/sintel/trailer.mp4",
-} as const;
+/** Your own photo from /public/images, by file name without extension.
+ *  Example: img("lifestyle1") -> /images/lifestyle1.jpg */
+const img = (name: string) => `/images/${name}.jpg`;
+
+/** YouTube thumbnail for a video id. */
+const yt = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
 /* -------------------------------------------------------------------------- */
 /*  Hero                                                                      */
@@ -85,9 +78,9 @@ export const hero = {
   primaryCta: { label: "View My Work", href: "#work" },
   secondaryCta: { label: "Let's Work Together", href: "#contact" },
   scrollHint: "Scroll to Explore",
-  background: photo("khanography-hero-mountains", 2000, 1200),
-  poster: photo("khanography-hero-mountains", 1600, 900),
-  video: clips.aerial,
+  background: "/images/hero.jpg",
+  poster: "/images/hero.jpg",
+  video: "",
   stats: [
     { value: 100, suffix: "+", label: "Projects Delivered" },
     { value: 50, suffix: "+", label: "Clients Worldwide" },
@@ -103,10 +96,10 @@ export const hero = {
 export const intro = {
   eyebrow: "The Professional",
   title: "A visual storyteller behind the lens.",
-  bio: "Hello! My name is Talha Khan, and I am a passionate Videographer, Video Editor, Photographer, and Drone Operator. I am from Koherai, Malakand (Lower Dir), Pakistan. With a strong creative vision and technical skills, I specialize in capturing and transforming moments into powerful visual stories.I currently work with IT Lewal Technologies, where I contribute to professional video production, photography, and drone projects. I have over 3 years of hands-on experience in the media and creative industry.",
+  bio: "Creative media professional with experience in videography, drone operations, video editing, and social media content creation. Skilled in producing engaging visual content for brands, businesses, and social media platforms.",
   bioSecondary:
-    "I handle the full pipeline — concept, cinematography, aerial coverage, colour grading and sound — so the final film feels like one continuous thought rather than a collection of clips.",
-  portrait: photo("asim-khan-portrait", 900, 1200),
+    "I handle the full pipeline — concept, shooting, aerial coverage, editing, colour and sound — so the final film feels like one continuous thought rather than a collection of clips.",
+  portrait: img("img-1"),
   details: [
     { label: "Based In", value: site.location },
     { label: "Experience", value: `${site.yearsExperience}+ Years` },
@@ -114,12 +107,12 @@ export const intro = {
     { label: "Clients", value: "50+ Worldwide" },
   ],
   specialties: [
-    "Cinematic Videography",
-    "Aerial / Drone",
-    "Colour Grading",
-    "Documentary",
-    "Portrait & Event",
-    "Short-Form Social",
+    "Videography",
+    "Drone Operation",
+    "Video Editing",
+    "Social Media Content",
+    "Reels Production",
+    "Photography",
   ],
   stats: [
     { value: 100, suffix: "+", label: "Projects" },
@@ -132,53 +125,55 @@ export const intro = {
 export const about = {
   eyebrow: "About Me",
   title: "Behind Every Frame Is a Story.",
-  portrait: photo("asim-khan-about-portrait", 1000, 1250),
-  portraitSecondary: photo("asim-khan-bts-camera", 1200, 900),
+  portrait: img("img-48"),
+  portraitSecondary: img("portrait3"),
   paragraphs: [
-    "I started out with a borrowed camera and a fascination with how light moves. Eight years later that curiosity hasn't changed — it's just become a craft. I photograph, film, fly and edit, because the strongest stories usually need more than one medium to land.",
-    "My work sits between documentary honesty and cinematic polish. I like handheld energy, natural sound, real locations and long lenses — but I also grade every frame, design every transition and mix every sound bed, because the edit is where a good project becomes a memorable one.",
-    "When I'm not on a shoot you'll find me at the desk, grading until the sky looks the way I remember it feeling on the day.",
+    "Hello! My name is Talha Khan, and I am a passionate Videographer, Video Editor, Photographer, and Drone Operator from Koherai, Malakand (Lower Dir), Pakistan.",
+    "With a strong creative vision and technical skills, I specialize in capturing and transforming moments into powerful visual stories. I currently work with Lewal Technologies, where I contribute to professional video production, photography, and drone projects.",
+    "I have over 3 years of hands-on experience in the media and creative industry, creating content for brands, businesses and social media platforms.",
   ],
   philosophy:
-    "Every project starts with a feeling. The gear, the grade, the drone — they're all in service of it.",
+    "Every project starts with a feeling. The camera, the edit, the drone — they're all in service of it.",
   experience: [
     {
-      period: "2021 — Now",
-      role: "Founder & Lead Filmmaker",
-      place: "Khanography · Islamabad",
-      note: "Full-service production for brands, agencies and couples across 14 countries.",
+      period: "Present",
+      role: "Production Manager & Professional Videographer",
+      place: "Lewal Technologies",
+      note: "Leading professional video production, photography and drone projects.",
     },
     {
-      period: "2019 — 2021",
-      role: "Senior Video Editor",
-      place: "Post House · Karachi",
-      note: "Led the colour and sound department on 200+ commercial and broadcast edits.",
+      period: "Freelance",
+      role: "Social Media Content Creator",
+      place: "Imdad Finance Guide",
+      note: "Creating engaging social media content and short-form video.",
     },
     {
-      period: "2018 — 2019",
-      role: "Camera Operator & Assistant Editor",
-      place: "Freelance · Islamabad",
-      note: "Documentary and event coverage for national broadcasters and NGOs.",
+      period: "Freelance",
+      role: "Reels Creator",
+      place: "Branded Clothe Shop",
+      note: "Reels and promotional content for a clothing brand.",
     },
     {
-      period: "2017 — 2018",
-      role: "Photography & Film Assistant",
-      place: "Studio · Islamabad",
-      note: "Studio lighting, product shoots and studio operation.",
+      period: "Freelance",
+      role: "Reels Creator",
+      place: "Super Star Parda Showroom",
+      note: "Reels and showroom content for social media.",
     },
   ],
   skills: [
-    { name: "Cinematography", level: 96 },
-    { name: "Colour Grading", level: 94 },
-    { name: "Aerial / Drone", level: 92 },
-    { name: "Story & Editing", level: 95 },
-    { name: "Photography", level: 90 },
-    { name: "Sound Design", level: 84 },
+    { name: "Videography", level: 92 },
+    { name: "Drone Operation", level: 90 },
+    { name: "Video Editing", level: 92 },
+    { name: "Social Media Content Creation", level: 90 },
+    { name: "Reels Production", level: 94 },
+    { name: "Content Branding", level: 85 },
+    { name: "Photography", level: 88 },
+    { name: "Creative Storytelling", level: 90 },
   ],
   facts: [
     { label: "Location", value: site.location },
     { label: "Languages", value: "English · Urdu · Pashto" },
-    { label: "Experience", value: `${site.yearsExperience} years` },
+    { label: "Experience", value: `${site.yearsExperience}+ years` },
     { label: "Also known as", value: "Khanography" },
   ],
 } as const;
@@ -189,57 +184,57 @@ export const about = {
 
 export const services = {
   eyebrow: "What I Do",
-  title: "One crew for the whole story.",
+  title: "One creator for the whole story.",
   description:
-    "Photography, film, aerials and post-production under one roof — so your project stays consistent from the first scout to the final export.",
+    "Photography, film, aerials and post-production in one place — so your project stays consistent from the first idea to the final export.",
   items: [
     {
       id: "videography",
       title: "Videography",
       icon: "Clapperboard",
-      image: photo("service-videography-set", 1000, 1250),
+      image: img("travel1"),
       description:
         "Professional event, commercial, wedding, corporate and cinematic video production.",
-      points: ["Brand & commercial films", "Cinematic wedding films", "Corporate & event coverage"],
+      points: ["Brand & commercial films", "Wedding films", "Corporate & event coverage"],
       href: "#films",
     },
     {
       id: "photography",
       title: "Photography",
       icon: "Camera",
-      image: photo("service-photography-portrait", 1000, 1250),
+      image: img("img-2"),
       description:
         "Portraits, events, products, landscapes, weddings and professional photography.",
-      points: ["Editorial portraits", "Wedding & event galleries", "Product & lifestyle"],
+      points: ["Portraits", "Event galleries", "Product & lifestyle"],
       href: "#photography",
     },
     {
       id: "editing",
       title: "Video Editing",
       icon: "Scissors",
-      image: photo("service-editing-suite", 1000, 1250),
+      image: img("img-15"),
       description:
         "Professional color grading, transitions, sound design, storytelling and cinematic editing.",
-      points: ["DaVinci Resolve & Premiere", "Colour & skin tone grading", "Mix, master & delivery"],
+      points: ["Colour grading", "Sound & music", "Delivery for every platform"],
       href: "#editing",
     },
     {
       id: "drone",
       title: "Drone Operator",
       icon: "Plane",
-      image: photo("service-drone-aerial", 1000, 1250),
+      image: img("img-23"),
       description: "Professional aerial photography and cinematic drone footage.",
-      points: ["4K/6K aerial capture", "Real estate & construction", "Licensed & insured flights"],
+      points: ["4K aerial capture", "Landscape & real estate", "Events & travel"],
       href: "#drone",
     },
     {
       id: "creative",
       title: "Creative Editing",
       icon: "Sparkles",
-      image: photo("service-creative-reels", 1000, 1250),
+      image: img("img-7"),
       description:
         "Short-form videos, social media content, reels, promotional videos and creative visual editing.",
-      points: ["Reels, TikTok & Shorts", "Motion graphics & captions", "Batch content packages"],
+      points: ["Reels, TikTok & Shorts", "Captions & motion", "Content packages"],
       href: "#editing",
     },
   ],
@@ -273,39 +268,91 @@ export const photoCategories = [
 
 export type PhotoCategory = Exclude<(typeof photoCategories)[number], "All">;
 
-const photoSeed = (n: number, w: number, h: number, gray = false) =>
-  photo(`khanography-shot-${n}`, w, h, gray);
+const P = { width: 800, height: 1200 }; // portrait
+const L = { width: 1200, height: 800 }; // landscape
 
 export const photos: PhotoItem[] = [
-  { id: "p01", title: "Golden Hour Portrait", category: "Portraits", src: photoSeed(1, 800, 1200), alt: "Outdoor golden hour portrait of a woman backlit by warm sunlight", width: 800, height: 1200, location: "Islamabad" },
-  { id: "p02", title: "The First Dance", category: "Weddings", src: photoSeed(2, 1200, 800), alt: "Newlyweds sharing their first dance under string lights at a wedding reception", width: 1200, height: 800, location: "Murree" },
-  { id: "p03", title: "Quiet Vow", category: "Weddings", src: photoSeed(3, 800, 1100), alt: "Bride adjusting her veil in soft window light before the ceremony", width: 800, height: 1100, location: "Murree" },
-  { id: "p04", title: "Front Row", category: "Events", src: photoSeed(4, 1200, 900), alt: "Crowd watching a live stage performance with dramatic lighting", width: 1200, height: 900, location: "Lahore" },
-  { id: "p05", title: "Ridgeline", category: "Nature", src: photoSeed(5, 1200, 800), alt: "Layered mountain ridgeline fading into morning mist", width: 1200, height: 800, location: "Hunza" },
-  { id: "p06", title: "Still Water", category: "Nature", src: photoSeed(6, 800, 1200), alt: "Turquoise alpine lake reflecting surrounding peaks at dusk", width: 800, height: 1200, location: "Hunza" },
-  { id: "p07", title: "Desert Crossing", category: "Travel", src: photoSeed(7, 1200, 900), alt: "Traveller walking across sand dunes in late afternoon light", width: 1200, height: 900, location: "Skardu" },
-  { id: "p08", title: "Old Town", category: "Travel", src: photoSeed(8, 800, 1150), alt: "Narrow historic alleyway with hanging lanterns", width: 800, height: 1150, location: "Peshawar" },
-  { id: "p09", title: "Studio Light", category: "Products", src: photoSeed(9, 1200, 1200), alt: "Minimal product still life lit with a single softbox on a seamless backdrop", width: 1200, height: 1200 },
-  { id: "p10", title: "Pour Over", category: "Products", src: photoSeed(10, 800, 1000), alt: "Handmade ceramic mug and coffee beans arranged on a wooden table", width: 800, height: 1000 },
-  { id: "p11", title: "Morning Ritual", category: "Lifestyle", src: photoSeed(11, 1200, 800), alt: "Person pouring coffee in a sunlit apartment kitchen", width: 1200, height: 800, location: "Islamabad" },
-  { id: "p12", title: "Studio Session", category: "Portraits", src: photoSeed(12, 1000, 1250), alt: "Editorial portrait lit with a single rim light against a dark backdrop", width: 1000, height: 1250, location: "Studio" },
-  { id: "p13", title: "Sparkler Exit", category: "Weddings", src: photoSeed(13, 1200, 1500), alt: "Wedding couple walking through a tunnel of sparklers at night", width: 1200, height: 1500 },
-  { id: "p14", title: "Concert Haze", category: "Events", src: photoSeed(14, 1200, 800), alt: "Silhouetted photographer shooting a backlit concert stage", width: 1200, height: 800, location: "Karachi" },
-  { id: "p15", title: "Glacier Blue", category: "Nature", src: photoSeed(15, 900, 1200), alt: "Blue glacier ice formations under a bright polar sky", width: 900, height: 1200, location: "Hunza" },
-  { id: "p16", title: "Night Market", category: "Travel", src: photoSeed(16, 1200, 900), alt: "Bustling night market street with neon signage and food stalls", width: 1200, height: 900, location: "Lahore" },
-  { id: "p17", title: "Detail Shot", category: "Products", src: photoSeed(17, 1000, 1000), alt: "Macro detail of a watch mechanism on a dark reflective surface", width: 1000, height: 1000 },
-  { id: "p18", title: "Sunday Light", category: "Lifestyle", src: photoSeed(18, 1200, 900), alt: "Family laughing together on a sofa in warm afternoon light", width: 1200, height: 900, location: "Islamabad" },
+  // Portraits
+  { id: "p01", title: "Studio Portrait", category: "Portraits", src: img("img-2"), alt: "Portrait of a bearded man in soft light", ...P },
+  { id: "p02", title: "Behind the Lens", category: "Portraits", src: img("portrait3"), alt: "Photographer holding a camera", ...P },
+  { id: "p03", title: "Classic Look", category: "Portraits", src: img("img-7"), alt: "Portrait of a young man in a black waistcoat", ...P },
+  { id: "p04", title: "Warm Smile", category: "Portraits", src: img("img-15"), alt: "Smiling man in a white shirt", ...P },
+  { id: "p05", title: "Young Eyes", category: "Portraits", src: img("img-31"), alt: "Portrait of a smiling boy", ...P },
+  { id: "p06", title: "Quiet Pose", category: "Portraits", src: img("img-4"), alt: "Boy sitting in a grey kurta", ...P },
+  { id: "p07", title: "Close Up", category: "Portraits", src: img("img-35"), alt: "Boy resting his face on his hand", ...L },
+  { id: "p08", title: "Sunny Cap", category: "Portraits", src: img("img-36"), alt: "Smiling boy in a cap", ...L },
+  { id: "p09", title: "Blue Hour Ridge", category: "Portraits", src: img("portrait5"), alt: "Man in a blue jacket on a rock at sunset", ...P },
+  { id: "p10", title: "Rock Perch", category: "Portraits", src: img("portrait4"), alt: "Man sitting on a rock above the valley", ...P },
+  { id: "p11", title: "Sunset Silhouette", category: "Portraits", src: img("portrait7"), alt: "Man sitting in silhouette at sunset", ...P },
+
+  // Weddings
+  { id: "p12", title: "Wedding Car", category: "Weddings", src: img("wedding1"), alt: "Car with pink lights on a forest road", ...P },
+  { id: "p13", title: "Wedding Day", category: "Weddings", src: img("wedding2"), alt: "Two boys standing together", ...P },
+
+  // Events
+  { id: "p14", title: "Match Day", category: "Events", src: img("event2"), alt: "Football players competing for the ball", ...L },
+  { id: "p15", title: "Village Football", category: "Events", src: img("event1"), alt: "Local football match on an open ground", ...L },
+  { id: "p16", title: "Under the Hills", category: "Events", src: img("event3"), alt: "Football match with the town in the background", ...L },
+  { id: "p17", title: "Kick Off", category: "Events", src: img("event4"), alt: "Players moving across the pitch", ...L },
+  { id: "p18", title: "On Stage", category: "Events", src: img("event5"), alt: "Speaker presenting at an event", ...L },
+  { id: "p19", title: "Community Gathering", category: "Events", src: img("lifestyle1"), alt: "Group of people posing together", ...L },
+  { id: "p20", title: "Peace Banner", category: "Events", src: img("lifestyle2"), alt: "People holding a banner", ...L },
+  { id: "p21", title: "Playing Field", category: "Events", src: img("img-32"), alt: "Children playing football on a field", ...L },
+
+  // Nature
+  { id: "p22", title: "Snow Peaks", category: "Nature", src: img("nature3"), alt: "Snow-covered mountain above pine forest", ...P },
+  { id: "p23", title: "Valley View", category: "Nature", src: img("nature10"), alt: "Green mountain valley with scattered houses", ...L },
+  { id: "p24", title: "Green Valley", category: "Nature", src: img("nature2"), alt: "Aerial view of a town in a green valley", ...L },
+  { id: "p25", title: "Town at Sunset", category: "Nature", src: img("nature1"), alt: "Town and river at sunset", ...L },
+  { id: "p26", title: "Sunset Ridge", category: "Nature", src: img("nature5"), alt: "Mountain ridge silhouetted at sunset", ...P },
+  { id: "p27", title: "Camp Meadow", category: "Nature", src: img("nature4"), alt: "Tent pitched in a mountain meadow", ...L },
+  { id: "p28", title: "Cow on the Hill", category: "Nature", src: img("nature6"), alt: "Cow resting on a grassy hill", ...L },
+  { id: "p29", title: "Moonlit Town", category: "Nature", src: img("nature7"), alt: "Town lights under a full moon", ...L },
+  { id: "p30", title: "Night Lights", category: "Nature", src: img("nature8"), alt: "Aerial view of a town at night", ...L },
+  { id: "p31", title: "Hillside Town", category: "Nature", src: img("nature9"), alt: "Town spread across a hillside", ...L },
+  { id: "p32", title: "Forest House", category: "Nature", src: img("nature11"), alt: "House among trees on a forested slope", ...P },
+  { id: "p33", title: "Waterfall Trail", category: "Nature", src: img("img-17"), alt: "Man standing beside a waterfall", ...P },
+  { id: "p34", title: "Dark Slopes", category: "Nature", src: img("img-9"), alt: "Dark mountain slope with pine trees", ...P },
+  { id: "p35", title: "Forest Detail", category: "Nature", src: img("portrait6"), alt: "Close-up of a mossy log in the forest", ...P },
+
+  // Travel
+  { id: "p36", title: "Mountain Walk", category: "Travel", src: img("travel1"), alt: "Man in a red jacket in the mountains", ...L },
+  { id: "p37", title: "Meadow Stop", category: "Travel", src: img("travel2"), alt: "Man standing in a green meadow below snowy peaks", ...P },
+  { id: "p38", title: "Friends on the Grass", category: "Travel", src: img("travel3"), alt: "Group sitting together in a mountain meadow", ...L },
+  { id: "p39", title: "Tent View", category: "Travel", src: img("travel4"), alt: "View of mountains from inside a tent", ...P },
+  { id: "p40", title: "Drone Overhead", category: "Travel", src: img("travel5"), alt: "Person resting on a hillside with a drone overhead", ...P },
+  { id: "p41", title: "Hill Rest", category: "Travel", src: img("travel6"), alt: "People relaxing on a hillside", ...L },
+  { id: "p42", title: "Mountain Village", category: "Travel", src: img("img-21"), alt: "Village built on a mountain slope", ...P },
+  { id: "p43", title: "Hillside Houses", category: "Travel", src: img("img-26"), alt: "Houses on a hillside", ...L },
+  { id: "p44", title: "Drone at Dusk", category: "Travel", src: img("img-23"), alt: "Drone flying above a mountain at dusk", ...P },
+  { id: "p45", title: "Drone Selfie", category: "Travel", src: img("img-25"), alt: "Selfie with a drone above the mountains", ...P },
+
+  // Products
+  { id: "p46", title: "Red Apples", category: "Products", src: img("img-37"), alt: "Fresh red apples close-up", ...L },
+  { id: "p47", title: "Clear Water", category: "Products", src: img("portrait2"), alt: "Water bottles in a stack", ...P },
+
+  // Lifestyle
+  { id: "p48", title: "Golden Tree", category: "Lifestyle", src: img("portrait1"), alt: "Autumn tree trunk with golden leaves", ...L },
+  { id: "p49", title: "Apple Smile", category: "Lifestyle", src: img("lifestyle3"), alt: "Girl smiling with a red apple", ...P },
+  { id: "p50", title: "Apple Picking", category: "Lifestyle", src: img("img-39"), alt: "Girl holding an apple", ...P },
+  { id: "p51", title: "Fresh Apples", category: "Lifestyle", src: img("img-43"), alt: "Boy holding a red apple", ...L },
+  { id: "p52", title: "Apple Harvest", category: "Lifestyle", src: img("lifestyle9"), alt: "Man holding a red apple", ...P },
+  { id: "p53", title: "Hillside View", category: "Lifestyle", src: img("lifestyle4"), alt: "Mountain landscape with houses in the valley", ...L },
+  { id: "p54", title: "Hill Houses", category: "Lifestyle", src: img("lifestyle5"), alt: "Houses on a forested hillside", ...P },
+  { id: "p55", title: "Friends in Green", category: "Lifestyle", src: img("lifestyle6"), alt: "Two young men standing among green trees", ...P },
+  { id: "p56", title: "Generations", category: "Lifestyle", src: img("lifestyle7"), alt: "Elderly man with a boy", ...P },
+  { id: "p57", title: "Into the Green", category: "Lifestyle", src: img("lifestyle8"), alt: "Man walking through green hills", ...P },
 ];
 
 export const photography = {
   eyebrow: "Photography",
   title: "Photography That Tells a Story.",
   description:
-    "Stills that hold the same emotion as the film — editorial portraits, honest documentary frames, and product work with a little soul in it.",
+    "Stills that hold the same emotion as the film — portraits, honest documentary frames, landscapes and product work.",
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/*  Videography showcase                                                      */
+/*  Videography showcase (YouTube)                                            */
 /* -------------------------------------------------------------------------- */
 
 export const videoCategories = [
@@ -325,10 +372,14 @@ export type VideoProject = {
   id: string;
   title: string;
   category: VideoCategory;
+  /** "long" = normal YouTube video, "short" = YouTube Short / reel */
+  format: "long" | "short";
+  youtubeId: string;
   year: string;
   client: string;
   thumbnail: string;
   alt: string;
+  /** Watch link (opens on YouTube) */
   src: string;
   duration: string;
   aspect: "16/9" | "2.39/1" | "4/5" | "9/16";
@@ -336,134 +387,71 @@ export type VideoProject = {
   services: string[];
 };
 
+/** Long videos — rename the titles to your real video names. */
+const longVideos = [
+  { id: "1YpH0SrBhb0", title: "Film 1" },
+  { id: "ebPRAwl7pX0", title: "Film 2" },
+  { id: "BZH098p5PxI", title: "Film 3" },
+  { id: "xLDPNE9Sfe0", title: "Film 4" },
+  { id: "tyoN0fnZ_RQ", title: "Film 5" },
+  { id: "7-HviWQphEA", title: "Film 6" },
+];
+
+/** Shorts / reels — rename the titles to your real reel names. */
+const shortVideos = [
+  { id: "g2Omk3ZLo3M", title: "Reel 1" },
+  { id: "w9e-PdTTe48", title: "Reel 2" },
+  { id: "wsOmjKyTjzs", title: "Reel 3" },
+  { id: "cA4VzNs1ezI", title: "Reel 4" },
+  { id: "dai2HcRXW8o", title: "Reel 5" },
+  { id: "r-FwZq2WjTs", title: "Reel 6" },
+  { id: "bjguyctEMZc", title: "Reel 7" },
+];
+
 export const videoProjects: VideoProject[] = [
-  {
-    id: "v01",
-    title: "Alpine Drift",
-    category: "Commercial",
-    year: "2025",
-    client: "Northline Outdoors",
-    thumbnail: photo("film-alpine-drift", 1600, 900),
-    alt: "Cinematic wide shot of a mountain ridge at sunrise for a brand film",
-    src: clips.alpine,
-    duration: "1:24",
-    aspect: "2.39/1",
-    description:
-      "A three-day expedition film built around one continuous sunrise. Shot on 4-camera with a drone pass for the closing reveal.",
-    services: ["Videography", "Drone", "Editing"],
-  },
-  {
-    id: "v02",
-    title: "Vows in the Fog",
-    category: "Wedding",
-    year: "2025",
-    client: "Ayesha & Bilal",
-    thumbnail: photo("film-vows-fog", 1600, 900),
-    alt: "Cinematic wedding film frame of a couple walking through mountain fog",
-    src: clips.cinematic,
-    duration: "4:12",
-    aspect: "2.39/1",
-    description:
-      "A quiet, documentary-style wedding film. No scripted moments — just two families, honest sound and a lot of mountain weather.",
-    services: ["Videography", "Photography", "Editing"],
-  },
-  {
-    id: "v03",
-    title: "Summit Sessions",
-    category: "Music",
-    year: "2024",
-    client: "Independent Artist",
-    thumbnail: photo("film-summit-sessions", 1600, 900),
-    alt: "Live music performance filmed on a mountain plateau at blue hour",
-    src: clips.motion,
-    duration: "2:48",
-    aspect: "16/9",
-    description:
-      "Four performances, one location, natural light only. Cut for a live session release and a vertical social cutdown.",
-    services: ["Videography", "Multi-cam", "Sound"],
-  },
-  {
-    id: "v04",
-    title: "Foundry Stories",
-    category: "Corporate",
-    year: "2025",
-    client: "Meridian Manufacturing",
-    thumbnail: photo("film-foundry-stories", 1600, 900),
-    alt: "Industrial documentary film frame of a factory floor with steel production",
-    src: clips.studio,
-    duration: "3:05",
-    aspect: "16/9",
-    description:
-      "A people-first corporate film shot across two production sites. Interview-led, then cut into a 90-second brand piece and six social edits.",
-    services: ["Corporate", "Interview", "Editing"],
-  },
-  {
-    id: "v05",
-    title: "Night of a Thousand Faces",
-    category: "Event",
-    year: "2024",
-    client: "Aurora Foundation Gala",
-    thumbnail: photo("film-gala-night", 1600, 900),
-    alt: "Event film frame of a gala dinner with candlelight and a full room",
-    src: clips.city,
-    duration: "2:16",
-    aspect: "16/9",
-    description:
-      "Multi-cam gala coverage delivered as a same-night highlight, a 5-minute film and 40 vertical clips for the client's social team.",
-    services: ["Event", "Multi-cam", "Highlights"],
-  },
-  {
-    id: "v06",
-    title: "Salt & Road",
-    category: "Documentary",
-    year: "2023",
-    client: "Self-initiated",
-    thumbnail: photo("film-salt-road", 1600, 900),
-    alt: "Documentary film frame of a road stretching through a desert landscape",
-    src: clips.travel,
-    duration: "18:40",
-    aspect: "2.39/1",
-    description:
-      "A short documentary following three salt traders along a 400-kilometre desert route. Funded independently over eleven months.",
-    services: ["Documentary", "Drone", "Sound"],
-  },
-  {
-    id: "v07",
-    title: "Studio Cutdowns",
-    category: "Social Media",
-    year: "2025",
-    client: "Lumen Studio",
-    thumbnail: photo("film-studio-cutdowns", 1600, 900),
-    alt: "Vertical social media video frame of a creative studio team filming",
-    src: clips.short,
-    duration: "0:45",
-    aspect: "9/16",
-    description:
-      "A monthly content engine: one shoot day, twelve vertical edits, motion captions and a hook-first structure tuned for retention.",
-    services: ["Creative Editing", "Reels", "Motion"],
-  },
-  {
-    id: "v08",
-    title: "Concrete Ascent",
-    category: "Commercial",
-    year: "2024",
-    client: "Skyline Developers",
-    thumbnail: photo("film-concrete-ascent", 1600, 900),
-    alt: "Cinematic drone reveal of a high-rise construction site at dusk",
-    src: clips.aerial,
-    duration: "1:05",
-    aspect: "2.39/1",
-    description:
-      "A property campaign carried almost entirely by aerial work — vertical lift-offs, top-down geometry and golden-hour reveals across three towers.",
-    services: ["Drone", "Videography", "Editing"],
-  },
+  ...longVideos.map(
+    (v, i): VideoProject => ({
+      id: `l${i + 1}`,
+      title: v.title,
+      category: "Commercial",
+      format: "long",
+      youtubeId: v.id,
+      year: "2025",
+      client: "Khanography",
+      thumbnail: yt(v.id),
+      alt: `${v.title} — video by Khanography`,
+      src: `https://www.youtube.com/watch?v=${v.id}`,
+      duration: "",
+      aspect: "16/9",
+      description: "A video produced, shot and edited by Khanography.",
+      services: ["Videography", "Editing"],
+    }),
+  ),
+  ...shortVideos.map(
+    (v, i): VideoProject => ({
+      id: `s${i + 1}`,
+      title: v.title,
+      category: "Social Media",
+      format: "short",
+      youtubeId: v.id,
+      year: "2025",
+      client: "Khanography",
+      thumbnail: yt(v.id),
+      alt: `${v.title} — short reel by Khanography`,
+      src: `https://www.youtube.com/shorts/${v.id}`,
+      duration: "",
+      aspect: "9/16",
+      description: "A short-form reel shot and edited by Khanography.",
+      services: ["Reels", "Creative Editing"],
+    }),
+  ),
 ];
 
 export const videography = {
   eyebrow: "Videography",
   title: "Moving Images. Real Stories.",
   description:
-    "Brand films, wedding films, documentaries and multi-cam event coverage — graded, mixed and delivered in every format a modern audience actually watches.",
+    "Long films and short reels — shot, edited and delivered in the formats a modern audience actually watches.",
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -491,10 +479,10 @@ export const beforeAfter: BeforeAfter[] = [
     category: "Colour Grading",
     before: gradeSeed(1),
     after: photo("khanography-grade-1", 1400, 900),
-    beforeAlt: "Ungraded raw footage frame of a mountain sunrise, flat and grey",
-    afterAlt: "The same frame after cinematic colour grading with warm highlights and teal shadows",
-    note: "Log to Rec.709 with a custom film-emulation node, highlight rolloff and a gentle halation pass.",
-    tools: ["DaVinci Resolve", "Custom Node Tree", "Halation"],
+    beforeAlt: "Ungraded frame of a mountain sunrise, flat and grey",
+    afterAlt: "The same frame after colour grading",
+    note: "Log to Rec.709 with highlight rolloff and a gentle film look.",
+    tools: ["DaVinci Resolve", "Premiere Pro"],
   },
   {
     id: "ba2",
@@ -502,10 +490,10 @@ export const beforeAfter: BeforeAfter[] = [
     category: "Skin Tone",
     before: gradeSeed(2),
     after: photo("khanography-grade-2", 1400, 900),
-    beforeAlt: "Ungraded raw studio portrait with mixed colour temperature",
-    afterAlt: "The same portrait with balanced skin tones and controlled contrast",
-    note: "Shot on a grey card, then balanced with a qualifier-driven skin tone pass and matched lenses.",
-    tools: ["Vector Scope", "Qualifier", "Power Window"],
+    beforeAlt: "Ungraded portrait with mixed colour temperature",
+    afterAlt: "The same portrait with balanced skin tones",
+    note: "Balanced skin tones with controlled contrast.",
+    tools: ["Vector Scope", "Qualifier"],
   },
   {
     id: "ba3",
@@ -513,10 +501,10 @@ export const beforeAfter: BeforeAfter[] = [
     category: "Cinematic Edit",
     before: gradeSeed(3),
     after: photo("khanography-grade-3", 1400, 900),
-    beforeAlt: "Flat handheld documentary footage of a desert highway",
-    afterAlt: "The same footage reframed and graded into a cinematic widescreen look",
-    note: "Reframed to 2.39:1, stabilised, speed-ramped and cut to a 30-second brand film.",
-    tools: ["Reframe", "Stabiliser", "Smart Reframe"],
+    beforeAlt: "Flat handheld footage of a highway",
+    afterAlt: "The same footage graded into a cinematic look",
+    note: "Reframed, stabilised and graded into a widescreen look.",
+    tools: ["Reframe", "Stabiliser"],
   },
   {
     id: "ba4",
@@ -524,20 +512,20 @@ export const beforeAfter: BeforeAfter[] = [
     category: "Reels / Shorts",
     before: gradeSeed(4),
     after: photo("khanography-grade-4", 900, 1600),
-    beforeAlt: "Raw vertical phone footage of a studio walkthrough",
-    afterAlt: "The same vertical footage edited into a fast-paced reel with captions",
-    note: "Hook-first pacing, motion captions, beat-matched cuts and a 45-second delivery for social.",
-    tools: ["Premiere Pro", "Motion Graphics", "Beat Sync"],
+    beforeAlt: "Raw vertical phone footage",
+    afterAlt: "The same footage edited into a fast-paced reel",
+    note: "Hook-first pacing, captions and beat-matched cuts.",
+    tools: ["Premiere Pro", "Motion Graphics"],
   },
 ];
 
 export const editingSkills = [
-  { title: "Colour Grading", detail: "Log transforms, film emulation, highlight rolloff and consistent looks across every deliverable." },
-  { title: "Cinematic Editing", detail: "Story-first cutting, 2.39:1 reframing, speed ramps and J/L cut pacing." },
-  { title: "Reels & Shorts", detail: "Vertical-first edits built for retention: strong hooks, captions and beat-matched rhythm." },
-  { title: "Sound Design", detail: "Dialogue cleanup, ambience layers, music editing and a final mix that survives phone speakers." },
-  { title: "Motion & Graphics", detail: "Titles, lower thirds, animated maps and logo stings designed in the edit." },
-  { title: "Delivery & Master", detail: "Platform-ready masters for web, broadcast, cinema and every social aspect ratio." },
+  { title: "Colour Grading", detail: "Consistent, cinematic looks across every deliverable." },
+  { title: "Cinematic Editing", detail: "Story-first cutting, speed ramps and clean pacing." },
+  { title: "Reels & Shorts", detail: "Vertical-first edits built for retention with strong hooks and captions." },
+  { title: "Sound Design", detail: "Dialogue cleanup, ambience, music editing and a clean final mix." },
+  { title: "Motion & Graphics", detail: "Titles, lower thirds and logo animations designed in the edit." },
+  { title: "Delivery & Master", detail: "Platform-ready exports for web and every social aspect ratio." },
 ] as const;
 
 export const editing = {
@@ -555,33 +543,32 @@ export const drone = {
   eyebrow: "Aerial & Drone",
   title: "See the World From Above.",
   description:
-    "Licensed drone operator with 100+ flight hours. Smooth establishing passes, controlled top-down geometry and cinematic reveals that give a project scale.",
-  hero: photo("khanography-drone-hero", 2200, 1200),
-  heroAlt: "Aerial view of a winding river cutting through a green valley at sunrise",
-  video: clips.aerial,
+    "Smooth establishing passes, clean top-down shots and cinematic reveals that give a project scale.",
+  hero: img("nature1"),
+  heroAlt: "Aerial view of a town and river at sunset",
+  video: "",
   capabilities: [
     { title: "Landscape Aerials", detail: "Establishing shots, ridgelines and scale-setting reveals." },
-    { title: "Real Estate", detail: "4K exteriors, twilight shoots and vertical social cutdowns." },
-    { title: "Events", detail: "Festival and wedding aerials flown under supervision." },
-    { title: "Travel", detail: "Location storytelling for tourism boards and productions." },
+    { title: "Real Estate", detail: "4K exteriors and vertical social cutdowns." },
+    { title: "Events", detail: "Wedding and event aerials flown safely." },
+    { title: "Travel", detail: "Location storytelling for tourism and productions." },
   ],
   gallery: [
-    { id: "a1", title: "Valley River", src: photo("aerial-valley-river", 1600, 1000), alt: "Aerial view of a river winding through a wide green valley" },
-    { id: "a2", title: "Desert Lines", src: photo("aerial-desert-lines", 1000, 1300), alt: "Top-down aerial of dune ridges creating abstract wave patterns" },
-    { id: "a3", title: "City Grid", src: photo("aerial-city-grid", 1600, 1000), alt: "Aerial view of a city street grid at blue hour" },
-    { id: "a4", title: "Coastal Cliffs", src: photo("aerial-coastal-cliffs", 1000, 1300), alt: "Aerial view of waves breaking against steep coastal cliffs" },
-    { id: "a5", title: "Snow Line", src: photo("aerial-snow-line", 1600, 1000), alt: "Aerial view of a snow covered ridge line above the clouds" },
-    { id: "a6", title: "River Delta", src: photo("aerial-river-delta", 1000, 1300), alt: "Aerial view of a branching river delta meeting the sea" },
+    { id: "a1", title: "Valley Town", src: img("nature2"), alt: "Aerial view of a town in a green valley" },
+    { id: "a2", title: "Drone at Dusk", src: img("img-23"), alt: "Drone flying above a mountain at dusk" },
+    { id: "a3", title: "Hillside Houses", src: img("img-26"), alt: "Aerial view of houses on a hillside" },
+    { id: "a4", title: "Sunset Ridge", src: img("nature5"), alt: "Mountain ridge silhouetted at sunset" },
+    { id: "a5", title: "Town and Hills", src: img("nature10"), alt: "Aerial view of a town surrounded by hills" },
+    { id: "a6", title: "Mountain Village", src: img("img-21"), alt: "Village built on a mountain slope" },
   ],
   stats: [
-    { value: 100, suffix: "+", label: "Flight Hours" },
-    { value: 320, suffix: "+", label: "Aerial Shots" },
+    { value: 100, suffix: "+", label: "Aerial Shots" },
     { value: 4, suffix: "K", label: "Max Resolution" },
   ],
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/*  Featured projects (case studies)                                          */
+/*  Featured projects (case studies) — edit these with your real work         */
 /* -------------------------------------------------------------------------- */
 
 export type Project = {
@@ -608,128 +595,116 @@ export const projects: Project[] = [
   {
     slug: "mountain-adventure-film",
     title: "Mountain Adventure Film",
-    client: "Northline Outdoors",
-    type: "Brand Film",
-    location: "Hunza Valley, Pakistan",
-    date: "March 2025",
-    services: ["Videography", "Drone", "Editing", "Colour Grading", "Sound Design"],
+    client: "Khanography",
+    type: "Travel Film",
+    location: "Dir, Khyber Pakhtunkhwa",
+    date: "2025",
+    services: ["Videography", "Drone", "Editing", "Colour Grading"],
     summary:
-      "A three-day expedition film for an outdoor brand — captured on location across 40km of valley, glacier and ridgeline, then cut into a hero film, six social cutdowns and a stills library.",
-    challenge:
-      "The client had a great product and no story. They needed a film that sold the feeling of the place without falling back on stock footage or voiceover.",
+      "A cinematic film exploring the mountains and valleys of Khyber Pakhtunkhwa, shot on location with aerial coverage.",
+    challenge: "Capturing the scale and mood of the mountains in changing light.",
     approach:
-      "I built the film around a single continuous sunrise. Scouted four days ahead, shot handheld and on a gimbal for intimacy, then used drone passes to give the story scale at the top and the end. Everything was graded to one look so the cutdowns matched the hero film.",
-    outcome:
-      "The hero film ran as a 60-second pre-roll and lifted assisted video completion by 41%. The stills library was reused across two print campaigns and the brand's product pages.",
-    cover: photo("project-mountain-adventure", 2000, 1250),
-    coverAlt: "Mountain adventure film still showing a climber silhouetted against a glacier ridge",
-    video: clips.alpine,
+      "Shot handheld for intimacy and with the drone for scale, then graded to one consistent look.",
+    outcome: "A film and a set of short social cutdowns, plus a stills library.",
+    cover: img("travel1"),
+    coverAlt: "Man in a red jacket standing in the mountains",
     gallery: [
-      { src: photo("project-mountain-adventure", 2000, 1250), alt: "Mountain adventure film still showing a climber silhouetted against a glacier ridge" },
-      { src: photo("project-mountain-2", 1400, 1000), alt: "Expedition team crossing a snow field during the shoot" },
-      { src: photo("project-mountain-3", 1000, 1400), alt: "Drone view of the valley floor with the crew visible below" },
-      { src: photo("project-mountain-4", 1400, 1000), alt: "Close-up of camera and gimbal rigged for a high-angle pass" },
+      { src: img("travel1"), alt: "Man in a red jacket standing in the mountains" },
+      { src: img("travel2"), alt: "Man standing in a green meadow below snowy peaks" },
+      { src: img("img-9"), alt: "Dark mountain slope with pine trees" },
+      { src: img("nature4"), alt: "Tent pitched in a mountain meadow" },
     ],
     metrics: [
-      { label: "Production Days", value: "3" },
-      { label: "Deliverables", value: "31" },
-      { label: "Completion Lift", value: "+41%" },
+      { label: "Format", value: "Film" },
+      { label: "Deliverables", value: "Film + Reels" },
+      { label: "Aerial", value: "Yes" },
     ],
     featured: true,
   },
   {
-    slug: "coastal-wedding-film",
-    title: "Coastal Wedding Film",
-    client: "Private Commission",
-    type: "Wedding Film",
-    location: "Kalam, Pakistan",
-    date: "October 2024",
-    services: ["Videography", "Photography", "Editing", "Colour Grading"],
+    slug: "valley-from-above",
+    title: "Valley From Above",
+    client: "Khanography",
+    type: "Aerial Project",
+    location: "Timergara, Dir Lower",
+    date: "2025",
+    services: ["Drone", "Photography", "Editing"],
     summary:
-      "A documentary-style wedding film for a two-day coastal celebration, shot almost entirely handheld with natural sound and two drone passes for the coastline.",
-    challenge:
-      "The couple wanted presence, not performance. No posed interviews, no staged vows, and no music driving the structure.",
+      "An aerial series over towns and valleys of Dir, flown at golden hour and dusk.",
+    challenge: "Finding clean compositions in a busy, uneven landscape.",
     approach:
-      "I shot with two small cameras and a shotgun mic, staying close and quiet. The edit is built from real audio — vows, laughter, the wind off the water — with a drone reveal used exactly once, at the transition from ceremony to reception.",
-    outcome:
-      "Delivered as a 6-minute film, a 90-second social cut and an 850-frame stills gallery. The couple called it the closest thing to a memory they had.",
-    cover: photo("project-coastal-wedding", 2000, 1250),
-    coverAlt: "Wedding film still of a couple walking along a coastline at dusk",
-    video: clips.cinematic,
+      "Scouted the light first, then flew slow reveals and top-down passes at sunset.",
+    outcome: "A set of aerial stills and short cinematic clips.",
+    cover: img("nature1"),
+    coverAlt: "Aerial view of a town and river at sunset",
     gallery: [
-      { src: photo("project-coastal-wedding", 2000, 1250), alt: "Wedding film still of a couple walking along a coastline at dusk" },
-      { src: photo("project-coastal-2", 1400, 1000), alt: "Guests gathered on a clifftop during the ceremony" },
-      { src: photo("project-coastal-3", 1000, 1400), alt: "Bride's dress detail in soft coastal light" },
-      { src: photo("project-coastal-4", 1400, 1000), alt: "Reception dinner table set up at twilight" },
+      { src: img("nature1"), alt: "Aerial view of a town and river at sunset" },
+      { src: img("nature2"), alt: "Aerial view of a town in a green valley" },
+      { src: img("img-26"), alt: "Houses on a hillside" },
+      { src: img("nature5"), alt: "Mountain ridge at sunset" },
     ],
     metrics: [
-      { label: "Film Length", value: "6:20" },
-      { label: "Stills Delivered", value: "850" },
-      { label: "Crew On Set", value: "1" },
+      { label: "Format", value: "Aerial" },
+      { label: "Resolution", value: "4K" },
+      { label: "Time", value: "Golden hour" },
     ],
     featured: true,
   },
   {
-    slug: "skyline-property-campaign",
-    title: "Skyline Property Campaign",
-    client: "Skyline Developers",
-    type: "Commercial",
-    location: "Islamabad, Pakistan",
-    date: "June 2024",
-    services: ["Drone", "Videography", "Editing", "Motion Graphics"],
+    slug: "community-football-day",
+    title: "Community Football Day",
+    client: "Local Community",
+    type: "Event Coverage",
+    location: "Dir Lower",
+    date: "2025",
+    services: ["Videography", "Photography", "Editing"],
     summary:
-      "An aerial-led campaign for three residential towers — one hero film, three tower films, a full 4K drone stills library and six vertical cutdowns.",
-    challenge:
-      "The towers looked identical from the ground. The campaign needed to make each one feel different, on a tight budget and a fixed launch date.",
+      "Photo and video coverage of a local football match, from kick-off to the final whistle.",
+    challenge: "Fast action in bright, changing light.",
     approach:
-      "I designed a repeatable aerial shot list — a vertical top-down, a slow orbit and a golden-hour rise — and shot all three towers to that same structure. Grading them to a single look made them read as one campaign.",
-    outcome:
-      "Delivered nine days before launch. The vertical cutdowns drove 2.3x the client's usual social engagement on property posts.",
-    cover: photo("project-skyline-campaign", 2000, 1250),
-    coverAlt: "Cinematic drone reveal of a high-rise residential tower at dusk",
-    video: clips.aerial,
+      "Shot from several positions to catch the action and the crowd, then cut a highlight reel.",
+    outcome: "A highlight reel and a gallery of match photographs.",
+    cover: img("event2"),
+    coverAlt: "Football players competing for the ball",
     gallery: [
-      { src: photo("project-skyline-campaign", 2000, 1250), alt: "Cinematic drone reveal of a high-rise residential tower at dusk" },
-      { src: photo("project-skyline-2", 1400, 1000), alt: "Top-down aerial geometry of tower rooftops and courtyards" },
-      { src: photo("project-skyline-3", 1000, 1400), alt: "Interior apartment living room prepared for the shoot" },
-      { src: photo("project-skyline-4", 1400, 1000), alt: "Motion graphics title frame from the campaign film" },
+      { src: img("event2"), alt: "Football players competing for the ball" },
+      { src: img("event1"), alt: "Local football match on an open ground" },
+      { src: img("event4"), alt: "Players moving across the pitch" },
+      { src: img("event3"), alt: "Football match in progress" },
     ],
     metrics: [
-      { label: "Towers Covered", value: "3" },
-      { label: "Flight Hours", value: "11" },
-      { label: "Social Lift", value: "2.3x" },
+      { label: "Format", value: "Highlights" },
+      { label: "Stills", value: "Gallery" },
+      { label: "Type", value: "Event" },
     ],
     featured: true,
   },
   {
-    slug: "atelier-brand-stories",
-    title: "Atelier Brand Stories",
-    client: "Lumen Studio",
-    type: "Documentary",
-    location: "Karachi, Pakistan",
-    date: "February 2025",
-    services: ["Videography", "Interview", "Editing", "Sound Design"],
+    slug: "social-reels-series",
+    title: "Social Reels Series",
+    client: "Branded Clothe Shop",
+    type: "Reels",
+    location: "Pakistan",
+    date: "2025",
+    services: ["Reels Production", "Creative Editing", "Content Branding"],
     summary:
-      "A four-part documentary series on the makers behind a lighting design studio, plus a monthly vertical content engine built from the same production days.",
-    challenge:
-      "A technical product in a technical room — the hardest kind of story to make feel human.",
+      "A series of short reels for a clothing brand, built for Instagram, TikTok and YouTube Shorts.",
+    challenge: "Making product content feel fresh every week.",
     approach:
-      "I shot interview-led with real tools in frame and hands doing the work. Each episode follows one maker through a single finished piece, so the product explains itself.",
-    outcome:
-      "Four episodes published over eight weeks. The studio's inbound enquiries from the series outpaced a full year of their previous marketing.",
-    cover: photo("project-atelier-stories", 2000, 1250),
-    coverAlt: "Documentary series still of a craftsperson working on a lighting fixture",
-    video: clips.studio,
+      "Hook-first edits, clean captions and consistent branding across every reel.",
+    outcome: "A repeatable content series for social media.",
+    cover: img("img-7"),
+    coverAlt: "Portrait of a young man in a white shalwar",
     gallery: [
-      { src: photo("project-atelier-stories", 2000, 1250), alt: "Documentary series still of a craftsperson working on a lighting fixture" },
-      { src: photo("project-atelier-2", 1400, 1000), alt: "Interview setup with two cameras in a workshop" },
-      { src: photo("project-atelier-3", 1000, 1400), alt: "Detail of hands assembling a fixture on a workbench" },
-      { src: photo("project-atelier-4", 1400, 1000), alt: "Final lit product in a finished interior set" },
+      { src: img("img-7"), alt: "Portrait of a young man in a white shalwar" },
+      { src: img("img-2"), alt: "Portrait of a bearded man in soft light" },
+      { src: img("img-15"), alt: "Smiling man in a white shirt" },
+      { src: img("portrait3"), alt: "Photographer holding a camera" },
     ],
     metrics: [
-      { label: "Episodes", value: "4" },
-      { label: "Vertical Edits", value: "12" },
-      { label: "Shoot Days", value: "2" },
+      { label: "Format", value: "Vertical" },
+      { label: "Platforms", value: "IG · TikTok · YT" },
+      { label: "Type", value: "Series" },
     ],
     featured: true,
   },
@@ -744,10 +719,10 @@ export const process = {
   title: "A process you can plan around.",
   steps: [
     { id: "01", title: "Plan", detail: "Understand the idea and requirements.", note: "Discovery call, references, shot list and a clear delivery plan." },
-    { id: "02", title: "Capture", detail: "Photography, videography and drone footage.", note: "Full crew where needed, always a small efficient one otherwise." },
+    { id: "02", title: "Capture", detail: "Photography, videography and drone footage.", note: "Full setup where needed, always lean and efficient otherwise." },
     { id: "03", title: "Edit", detail: "Professional editing, color grading and sound.", note: "Story structure first, look second, detail third." },
-    { id: "04", title: "Refine", detail: "Review and improve the final result.", note: "Two structured revision rounds included in every project." },
-    { id: "05", title: "Deliver", detail: "High-quality final content ready for use.", note: "Masters, cutdowns, stills and social exports, organised and delivered." },
+    { id: "04", title: "Refine", detail: "Review and improve the final result.", note: "Revision rounds included in every project." },
+    { id: "05", title: "Deliver", detail: "High-quality final content ready for use.", note: "Final films, reels, stills and social exports, organised and delivered." },
   ],
 } as const;
 
@@ -759,65 +734,59 @@ export const behindTheScenes = {
   eyebrow: "Behind The Scenes",
   title: "The work behind the work.",
   description:
-    "Grip, gaffer, gimbal, timeline. The unglamorous part of making something look effortless.",
+    "Early starts, long walks and a lot of patience. The part of making something look effortless.",
   items: [
-    { id: "b1", title: "Camera & Monitor", caption: "Checking framing before the take", src: photo("bts-camera-monitor", 1200, 900), alt: "Camera operator checking a monitor while filming a location" },
-    { id: "b2", title: "Drone Pre-flight", caption: "Compass, batteries, airspace check", src: photo("bts-drone-preflight", 900, 1200), alt: "Drone operator running pre-flight checks on a controller" },
-    { id: "b3", title: "Edit Suite", caption: "Where the film actually gets made", src: photo("bts-edit-suite", 1200, 900), alt: "Editing workstation with a colour grading timeline open on a large display" },
-    { id: "b4", title: "Location Scouting", caption: "Finding the light before the crew arrives", src: photo("bts-location-scout", 1200, 900), alt: "Scout checking light direction at an outdoor location" },
-    { id: "b5", title: "Camera Build", caption: "Rigged for a high-angle gimbal pass", src: photo("bts-camera-build", 900, 1200), alt: "Camera rigged on a gimbal with follow focus" },
-    { id: "b6", title: "On Set", caption: "Small crew, full attention", src: photo("bts-on-set", 1200, 900), alt: "Film crew working on set with a camera on a tripod" },
-    { id: "b7", title: "Colour Grading", caption: "Building the look, node by node", src: photo("bts-grading", 1200, 900), alt: "Colourist adjusting scopes on a grading monitor" },
-    { id: "b8", title: "Wrap", caption: "Last shot of the day, always the best one", src: photo("bts-wrap", 900, 1200), alt: "Crew packing camera equipment into cases at the end of a shoot" },
+    { id: "b1", title: "Camera Ready", caption: "Checking the frame before the take", src: img("portrait3"), alt: "Photographer holding a camera" },
+    { id: "b2", title: "Drone at Dusk", caption: "Flying into the last light", src: img("img-25"), alt: "Drone flying over a mountain at dusk" },
+    { id: "b3", title: "Camp Setup", caption: "Home base for a mountain shoot", src: img("nature4"), alt: "Tent pitched in a mountain meadow" },
+    { id: "b4", title: "Location Scouting", caption: "Finding the light before the shoot", src: img("travel2"), alt: "Man standing in a mountain meadow" },
+    { id: "b5", title: "View From the Tent", caption: "Waiting for the right morning", src: img("travel4"), alt: "View of mountains from inside a tent" },
+    { id: "b6", title: "On the Trail", caption: "Carrying the gear to the shot", src: img("travel1"), alt: "Man in a red jacket walking in the mountains" },
+    { id: "b7", title: "Rest Stop", caption: "Breaks between takes", src: img("travel6"), alt: "People relaxing on a hillside" },
+    { id: "b8", title: "Aerial Check", caption: "Reviewing the drone footage", src: img("travel5"), alt: "Person resting on a hillside with a drone overhead" },
   ],
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/*  Equipment                                                                 */
+/*  Equipment — replace with your real gear                                   */
 /* -------------------------------------------------------------------------- */
 
 export const equipment = {
   eyebrow: "Equipment",
   title: "The kit behind the frames.",
-  description: "A deliberate, maintained kit — chosen for reliability, colour consistency and the ability to work fast in difficult light.",
+  description:
+    "A maintained kit chosen for reliability, colour consistency and the ability to work fast in difficult light.",
   groups: [
     { id: "camera", title: "Cameras", items: [
-      { name: "Sony FX3", spec: "Full-frame cinema line · 4K 120p" },
-      { name: "Sony A7S III", spec: "Low-light workhorse · 4K 120p" },
-      { name: "Canon R6 Mark II", spec: "24MP stills · 6K oversampled 4K" },
+      { name: "Your Camera Body", spec: "Replace with your camera" },
+      { name: "Your Second Camera", spec: "Replace with your camera" },
     ] },
     { id: "lenses", title: "Lenses", items: [
-      { name: "Sony 24-70mm GM II", spec: "Standard zoom · constant f/2.8" },
-      { name: "Sigma 35mm Art", spec: "Low-light prime · f/1.4" },
-      { name: "Sony 70-200mm GM II", spec: "Telephoto · compressed portraits" },
-      { name: "Zeiss 16mm T*", spec: "Ultra-wide prime · f/2.8" },
+      { name: "Your Main Lens", spec: "Replace with your lens" },
+      { name: "Your Second Lens", spec: "Replace with your lens" },
     ] },
     { id: "aerial", title: "Aerial", items: [
-      { name: "DJI Mavic 3 Pro", spec: "Triple camera · 5.1K/60p" },
-      { name: "DJI Air 3S", spec: "Dual camera · 4K/100p HDR" },
-      { name: "ND Filter Set", spec: "ND8 / ND16 / ND32 · exposure control" },
+      { name: "Your Drone", spec: "Replace with your drone model" },
+      { name: "ND Filter Set", spec: "Exposure control" },
     ] },
     { id: "support", title: "Support & Sound", items: [
-      { name: "DJI RS 4 Pro", spec: "3-axis gimbal · 4.5kg payload" },
-      { name: "Sachtler Flowtech 75", spec: "Fluid head · carbon tripod" },
-      { name: "RØDE NTG5", spec: "Shotgun microphone · RF-bias" },
-      { name: "Zoom F6", spec: "6-channel field recorder · 32-bit float" },
+      { name: "Gimbal", spec: "Replace with your gimbal" },
+      { name: "Tripod", spec: "Replace with your tripod" },
+      { name: "Microphone", spec: "Replace with your mic" },
     ] },
     { id: "lighting", title: "Lighting", items: [
-      { name: "Aputure 600d Pro", spec: "Daylight COB · 600W" },
-      { name: "Aputure MC Pro", spec: "RGBWW pocket light" },
-      { name: "5-in-1 Reflector", spec: "Portable bounce · 90cm" },
+      { name: "Key Light", spec: "Replace with your light" },
+      { name: "Reflector", spec: "Portable bounce" },
     ] },
     { id: "post", title: "Post Suite", items: [
-      { name: "Mac Studio M3 Ultra", spec: "Colour · 4K multi-stream" },
-      { name: "DaVinci Resolve Studio", spec: "Editing · Fusion · Fairlight" },
-      { name: "Calibrated 4K Display", spec: "Wide-gamut reference monitor" },
+      { name: "Editing Workstation", spec: "Replace with your computer" },
+      { name: "Editing Software", spec: "Premiere Pro · DaVinci Resolve" },
     ] },
   ],
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/*  Testimonials                                                              */
+/*  Testimonials — placeholders, replace with real client words               */
 /* -------------------------------------------------------------------------- */
 
 export const testimonials = {
@@ -826,53 +795,30 @@ export const testimonials = {
   items: [
     {
       id: "t1",
-      name: "Daniel Rahim",
-      role: "Brand Manager",
-      company: "Northline Outdoors",
-      projectType: "Mountain Adventure Film",
-      quote:
-        "Asim turned a product shoot into a film we still use three years later. The drone work gave it scale, the grade gave it a look, and the process was genuinely easy.",
-      avatar: photo("client-daniel", 200, 200),
+      name: "Client Name",
+      role: "Owner",
+      company: "Brand Name",
+      projectType: "Reels",
+      quote: "Replace this with a real client message about working with Talha.",
+      avatar: photo("client-1", 200, 200),
     },
     {
       id: "t2",
-      name: "Ayesha & Bilal",
-      role: "Newlyweds",
-      company: "Wedding Film",
-      projectType: "Coastal Wedding Film",
-      quote:
-        "We asked for no staged moments and he gave us exactly that. Watching it back felt like remembering the day rather than watching a production.",
-      avatar: photo("client-ayesha", 200, 200),
+      name: "Client Name",
+      role: "Manager",
+      company: "Company Name",
+      projectType: "Video Production",
+      quote: "Replace this with a real client message about working with Talha.",
+      avatar: photo("client-2", 200, 200),
     },
     {
       id: "t3",
-      name: "Sana Mahmood",
-      role: "Creative Director",
-      company: "Lumen Studio",
-      projectType: "Atelier Brand Stories",
-      quote:
-        "He understands a technical product and a human story at the same time. The series outperformed a full year of our previous marketing.",
-      avatar: photo("client-sana", 200, 200),
-    },
-    {
-      id: "t4",
-      name: "Omar Sheikh",
+      name: "Client Name",
       role: "Founder",
-      company: "Skyline Developers",
-      projectType: "Property Campaign",
-      quote:
-        "Delivered nine days early, three towers, one consistent look and cutdowns our social team could publish without touching. Faultless.",
-      avatar: photo("client-omar", 200, 200),
-    },
-    {
-      id: "t5",
-      name: "Hina Farooq",
-      role: "Events Lead",
-      company: "Aurora Foundation",
-      projectType: "Gala Night Coverage",
-      quote:
-        "Six cameras, two hundred guests and a same-night highlight cut. He ran it like a newsroom and still found the emotional moments.",
-      avatar: photo("client-hina", 200, 200),
+      company: "Business Name",
+      projectType: "Social Media Content",
+      quote: "Replace this with a real client message about working with Talha.",
+      avatar: photo("client-3", 200, 200),
     },
   ],
 } as const;
@@ -945,18 +891,17 @@ export const footer = {
 export const seo = {
   title: `${site.name} — ${site.brand} | Videographer, Photographer & Drone Operator`,
   description:
-    "Khanography is the cinematic portfolio of Asim Khan — videographer, video editor, photographer, drone operator and creative editor creating films, photography and aerial footage that turn moments into stories.",
+    "Khanography is the cinematic portfolio of Talha Khan — videographer, video editor, photographer, drone operator and creative editor creating films, photography and aerial footage that turn moments into stories.",
   keywords: [
     "videographer",
     "video editor",
     "photographer",
     "drone operator",
-    "cinematic film",
-    "wedding videography",
+    "reels creator",
+    "social media content creator",
     "aerial cinematography",
-    "colour grading",
     "Khanography",
-    "Asim Khan",
+    "Talha Khan",
   ],
 } as const;
 
@@ -964,5 +909,5 @@ export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
 
-export const heroPoster = photo("khanography-hero-mountains", 1600, 900);
-export const ogImage = photo("khanography-og", 1200, 630);
+export const heroPoster = "/images/hero.jpg";
+export const ogImage = "/images/hero.jpg";
