@@ -1,83 +1,240 @@
-import { ImageResponse } from "next/og";
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif, Sora } from "next/font/google";
+import Script from "next/script";
+import { site, seo } from "@/data/site";
+import { themeInitScript } from "@/lib/theme";
+import { Navbar } from "@/components/site/navbar";
+import { Footer } from "@/components/site/footer";
+import { CustomCursor } from "@/components/site/custom-cursor";
+import { ScrollProgress } from "@/components/site/scroll-progress";
+import { WhatsAppButton } from "@/components/site/whatsapp-button";
+import "./globals.css";
 
-export const alt = "Khanography — cinematic film, photography and aerial work";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+/* -------------------------------------------------------------------------- */
+/*  Fonts — self-hosted by next/font, preloaded, no layout shift              */
+/* -------------------------------------------------------------------------- */
 
-/**
- * Social share card. Rendered at build time (statically optimised).
- * Uses system-safe fonts so no network fetch is required at build.
- */
-export default function OpengraphImage() {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background:
-            "linear-gradient(135deg, #05070b 0%, #0b101a 45%, #131a26 100%)",
-          padding: "72px 80px",
-          color: "#eef2f8",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 14,
-              border: "2px solid #e9a23b",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#e9a23b",
-              fontSize: 22,
-            }}
-          >
-            ▶
-          </div>
-          <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: -0.5 }}>
-            Khanography
-          </div>
-        </div>
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sora",
+  weight: ["400", "500", "600"],
+});
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div
-            style={{
-              fontSize: 74,
-              lineHeight: 1.02,
-              fontWeight: 600,
-              letterSpacing: -2.6,
-              maxWidth: 940,
-            }}
-          >
-            I Capture Stories From Every Perspective.
-          </div>
-          <div style={{ fontSize: 26, color: "#aeb8c9", maxWidth: 880 }}>
-            Videography · Photography · Video Editing · Drone Operator
-          </div>
-        </div>
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            borderTop: "1px solid rgba(255,255,255,0.14)",
-            paddingTop: 26,
-            fontSize: 22,
-            color: "#7f8a9d",
-          }}
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument",
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
+/* -------------------------------------------------------------------------- */
+/*  SEO                                                                       */
+/* -------------------------------------------------------------------------- */
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: seo.title,
+    template: `%s — ${site.brand}`,
+  },
+  description: seo.description,
+  keywords: [...seo.keywords],
+  applicationName: site.brand,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.brand,
+  category: "Photography & Videography",
+
+  // Google Search Console verification (renders the <meta> tag automatically)
+  verification: {
+    google: "TxgSXLMu5zlf3ihJNr8psrStRSXph5Kt7q3DZV7O0_U",
+  },
+
+  // NOTE: no root canonical here. Set `alternates.canonical` per page instead.
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: site.url,
+    siteName: site.brand,
+    title: seo.title,
+    description: seo.description,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `${site.brand} — cinematic film, photography and aerial work by ${site.name}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.title,
+    description: seo.description,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#05070b" },
+  ],
+};
+
+/* -------------------------------------------------------------------------- */
+/*  Structured data                                                           */
+/* -------------------------------------------------------------------------- */
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      alternateName: site.brand,
+      jobTitle: site.roles.join(", "),
+      description: seo.description,
+      image: `${site.url}/opengraph-image`,
+      email: `mailto:${site.email}`,
+      telephone: site.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.locationShort,
+        addressCountry: "PK",
+      },
+      knowsAbout: [
+        "Videography",
+        "Video Editing",
+        "Colour Grading",
+        "Photography",
+        "Drone Operation",
+        "Aerial Cinematography",
+        "Sound Design",
+      ],
+      worksFor: { "@id": `${site.url}/#organization` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.brand,
+      url: site.url,
+      logo: `${site.url}/icon.svg`,
+      founder: { "@id": `${site.url}/#person` },
+      sameAs: site.socials.map((social) => social.href),
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site.url}/#service`,
+      name: site.brand,
+      description: seo.description,
+      url: site.url,
+      image: `${site.url}/opengraph-image`,
+      telephone: site.phone,
+      email: site.email,
+      priceRange: "$$",
+      areaServed: "Worldwide",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.locationShort,
+        addressCountry: "PK",
+      },
+      founder: { "@id": `${site.url}/#person` },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Services",
+        itemListElement: [
+          "Videography",
+          "Photography",
+          "Video Editing",
+          "Drone Operation",
+          "Creative Editing",
+        ].map((name) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.brand,
+      description: seo.description,
+      inLanguage: "en",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+  ],
+};
+
+/* -------------------------------------------------------------------------- */
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${sora.variable} ${inter.variable} ${instrument.variable}`}
+    >
+      <head>
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+      </head>
+      <body className="flex min-h-dvh flex-col antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-9999 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:text-bg"
         >
-          <span>Talha Khan — Islamabad, Pakistan</span>
-          <span style={{ color: "#e9a23b" }}>khanography.vercel.app</span>
-        </div>
-      </div>
-    ),
-    size,
+          Skip to content
+        </a>
+
+        <ScrollProgress />
+        <CustomCursor />
+        <Navbar />
+
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+
+        <Footer />
+        <WhatsAppButton />
+
+        {/* Plain script tag so crawlers see the JSON-LD in the initial HTML */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      </body>
+    </html>
   );
 }
