@@ -36,7 +36,7 @@ const instrument = Instrument_Serif({
 });
 
 /* -------------------------------------------------------------------------- */
-/*  SEO                                                                      */
+/*  SEO                                                                       */
 /* -------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
@@ -51,8 +51,15 @@ export const metadata: Metadata = {
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   publisher: site.brand,
-  alternates: { canonical: "/" },
   category: "Photography & Videography",
+
+  // Google Search Console verification (renders the <meta> tag automatically)
+  verification: {
+    google: "TxgSXLMu5zlf3ihJNr8psrStRSXph5Kt7q3DZV7O0_U",
+  },
+
+  // NOTE: no root canonical here. Set `alternates.canonical` per page instead.
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -62,7 +69,7 @@ export const metadata: Metadata = {
     description: seo.description,
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: `${site.brand} — cinematic film, photography and aerial work by ${site.name}`,
@@ -73,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: seo.title,
     description: seo.description,
-    images: ["/opengraph-image"],
+    images: ["/og.jpg"],
   },
   robots: {
     index: true,
@@ -113,7 +120,7 @@ const jsonLd = {
       alternateName: site.brand,
       jobTitle: site.roles.join(", "),
       description: seo.description,
-      image: `${site.url}/opengraph-image`,
+      image: `${site.url}/og.jpg`,
       email: `mailto:${site.email}`,
       telephone: site.phone,
       address: {
@@ -147,7 +154,7 @@ const jsonLd = {
       name: site.brand,
       description: seo.description,
       url: site.url,
-      image: `${site.url}/opengraph-image`,
+      image: `${site.url}/og.jpg`,
       telephone: site.phone,
       email: site.email,
       priceRange: "$$",
@@ -192,6 +199,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${sora.variable} ${inter.variable} ${instrument.variable}`}
     >
       <head>
@@ -220,10 +228,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <WhatsAppButton />
 
-        <Script
-          id="json-ld"
+        {/* Plain script tag so crawlers see the JSON-LD in the initial HTML */}
+        <script
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
