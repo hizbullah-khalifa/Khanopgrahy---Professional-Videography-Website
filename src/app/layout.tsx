@@ -54,9 +54,13 @@ export const metadata: Metadata = {
   category: "Photography & Videography",
 
   // Google Search Console verification (renders the <meta> tag automatically)
-  verification: {
-    google: "yO5ByLFzDsKzDD0DmteEhxOsI7zD2XH1BcozzKlimQk",
-  },
+ verification: {
+  google: [
+    "w_ZE60SpnOLR-tX6wBeqv_xmMbc6ZDNUwIQX0BvDt_M", // new
+    "yO5ByLFzDsKzDD0DmteEhxOsI7zD2XH1BcozzKlimQk",
+    "TxgSXLMu5zlf3ihJNr8psrStRSXph5Kt7q3DZV7O0_U",
+  ],
+},
 
   // NOTE: no root canonical here. Set `alternates.canonical` per page instead.
 
