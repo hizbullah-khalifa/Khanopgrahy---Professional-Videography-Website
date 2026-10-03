@@ -16,7 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "yearly" as const,
       priority: 0.8,
-      images: [project.cover],
+      images: [
+        project.cover.startsWith("http")
+          ? project.cover
+          : `${site.url}${project.cover}`,
+      ],
     })),
   ];
 }
