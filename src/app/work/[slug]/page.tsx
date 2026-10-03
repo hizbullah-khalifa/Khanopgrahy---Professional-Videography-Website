@@ -49,6 +49,8 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
   const index = projects.findIndex((entry) => entry.slug === slug);
   const next = projects[(index + 1) % projects.length];
+  const isLogo = project.coverFit === "contain";
+  const nextIsLogo = next.coverFit === "contain";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -77,16 +79,36 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         className="grain relative isolate flex min-h-[78svh] items-end overflow-hidden pt-28 pb-12"
       >
         <div className="absolute inset-0 -z-10">
-          <SmartImage
-            src={project.cover}
-            alt={project.coverAlt}
-            ratio="16/9"
-            sizes="100vw"
-            eager
-            quality={90}
-            className="absolute inset-0 size-full"
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/35 to-black/90" />
+          {isLogo ? (
+            <>
+              {/* Logo: dark background + logo shown whole on a white tile */}
+              <div className="absolute inset-0 bg-[#14161c]" />
+              <div className="absolute top-28 right-6 w-[clamp(120px,22vw,340px)] overflow-hidden rounded-3xl shadow-2xl md:right-[6vw]">
+                <SmartImage
+                  src={project.cover}
+                  alt={project.coverAlt}
+                  ratio="1/1"
+                  sizes="340px"
+                  eager
+                  quality={90}
+                  fit="contain"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <SmartImage
+                src={project.cover}
+                alt={project.coverAlt}
+                ratio="16/9"
+                sizes="100vw"
+                eager
+                quality={90}
+                className="absolute inset-0 size-full"
+              />
+              <div className="absolute inset-0 bg-linear-to-b from-black/75 via-black/35 to-black/90" />
+            </>
+          )}
         </div>
 
         <div className="shell w-full">
@@ -238,6 +260,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
               sizes="100vw"
               zoom
               quality={90}
+              fit={nextIsLogo ? "contain" : "cover"}
               className="opacity-45"
             />
             <div className="absolute inset-0 bg-linear-to-b from-bg/85 via-bg/55 to-bg/90" />
@@ -251,7 +274,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
               {next.title}
               <ArrowRight
                 className="size-6 text-accent transition-transform duration-500 group-hover:translate-x-2"
-                strokeWidth={1.5}
+                strokeWidth={1.6}
               />
             </span>
             <span className="text-[0.8rem] text-muted">

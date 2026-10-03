@@ -133,7 +133,7 @@ export function Footer() {
             © {year} {site.name} · {site.brand}. All rights reserved.
           </p>
           <p className="flex items-center gap-4">
-            <span>Built for speed. Shot on location.</span>
+            <span>Built By Hizbullah Khalifa.</span>
             <a href="#top" className="transition-colors hover:text-accent">
               Back to top ↑
             </a>
