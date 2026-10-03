@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 
   // Google Search Console verification (renders the <meta> tag automatically)
   verification: {
-    google: "TxgSXLMu5zlf3ihJNr8psrStRSXph5Kt7q3DZV7O0_U",
+    google: "yO5ByLFzDsKzDD0DmteEhxOsI7zD2XH1BcozzKlimQk",
   },
 
   // NOTE: no root canonical here. Set `alternates.canonical` per page instead.
